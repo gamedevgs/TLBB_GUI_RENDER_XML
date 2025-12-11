@@ -1,12 +1,12 @@
 # TLBB GUI Web Renderer
 
 Ứng dụng web để render và chỉnh sửa file XML giao diện của game Thiên Long Bát Bộ (TLBB) thành HTML/CSS/JavaScript.
-
+![Mô tả hình ảnh](./review/img1.png)
 ## 1/📂Bổ sung Cấu trúc thư mục game của các bạn
 ✨data\Config\StrDic.txt chứa từ điển chuỗi giao diện.
 ✨data\Interface chứa các file XML giao diện mẫu từ game.
 ✨data\Material chứa các tài nguyên hình ảnh liên quan.
-
+![Mô tả hình ảnh](./review/datastruct.png)
 ## 2 Khởi chạy ứng dụng web:
 Mở file `index.html` trong trình duyệt web hiện đại (Chrome, Firefox, Edge).
 hoặc dùng vs code chạy live server.
