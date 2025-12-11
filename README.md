@@ -1,4 +1,4 @@
-# TLBB GUI Web Renderer
+# https://trickgame24h.blogspot.com/ ShARE TLBB GUI Web Renderer
 
 Ứng dụng web để render và chỉnh sửa file XML giao diện của game Thiên Long Bát Bộ (TLBB) thành HTML/CSS/JavaScript.
 ![Mô tả hình ảnh](./review/img1.png)
