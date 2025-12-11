@@ -1,0 +1,22 @@
+# TLBB Web UI - Ignore test files
+tests/
+*.test.html
+*-test.html
+*-debug.html
+debug-*.html
+
+# Temporary files
+*.tmp
+*.bak
+*~
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+/data/Interface
+/data/Material

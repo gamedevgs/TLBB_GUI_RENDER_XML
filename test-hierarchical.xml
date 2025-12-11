@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GUILayout >
+    <Window Type="DefaultWindow" Name="Root" >
+        <Property Name="Text" Value="Root Window" />
+        <Property Name="AbsolutePosition" Value="{0,0}" />
+        <Property Name="AbsoluteSize" Value="{800,600}" />
+        <Property Name="Visible" Value="True" />
+        
+        <Window Type="TLBB_MainFrame1" Name="MainContainer" >
+            <Property Name="Text" Value="Main Container" />
+            <Property Name="AbsolutePosition" Value="{50,50}" />
+            <Property Name="AbsoluteSize" Value="{400,300}" />
+            <Property Name="Visible" Value="True" />
+            
+            <Window Type="TLBB_Button" Name="Button1" >
+                <Property Name="Text" Value="Button 1" />
+                <Property Name="AbsolutePosition" Value="{10,10}" />
+                <Property Name="AbsoluteSize" Value="{80,30}" />
+                <Property Name="Visible" Value="True" />
+            </Window>
+            
+            <Window Type="TLBB_Button" Name="Button2" >
+                <Property Name="Text" Value="Button 2" />
+                <Property Name="AbsolutePosition" Value="{100,10}" />
+                <Property Name="AbsoluteSize" Value="{80,30}" />
+                <Property Name="Visible" Value="True" />
+            </Window>
+            
+            <Window Type="TLBB_MainFrame2" Name="SubContainer" >
+                <Property Name="Text" Value="Sub Container" />
+                <Property Name="AbsolutePosition" Value="{10,60}" />
+                <Property Name="AbsoluteSize" Value="{200,150}" />
+                <Property Name="Visible" Value="True" />
+                
+                <Window Type="TLBB_Text" Name="Label1" >
+                    <Property Name="Text" Value="Label Inside Sub" />
+                    <Property Name="AbsolutePosition" Value="{5,5}" />
+                    <Property Name="AbsoluteSize" Value="{100,20}" />
+                    <Property Name="Visible" Value="True" />
+                </Window>
+                
+                <Window Type="TLBB_ActionButton" Name="ActionBtn" >
+                    <Property Name="Text" Value="Action" />
+                    <Property Name="AbsolutePosition" Value="{5,30}" />
+                    <Property Name="AbsoluteSize" Value="{60,25}" />
+                    <Property Name="Visible" Value="True" />
+                </Window>
+            </Window>
+        </Window>
+        
+        <Window Type="TLBB_MainFrame3" Name="SidePanel" >
+            <Property Name="Text" Value="Side Panel" />
+            <Property Name="AbsolutePosition" Value="{500,50}" />
+            <Property Name="AbsoluteSize" Value="{200,400}" />
+            <Property Name="Visible" Value="True" />
+            
+            <Window Type="TLBB_Text" Name="SideLabel" >
+                <Property Name="Text" Value="Side Content" />
+                <Property Name="AbsolutePosition" Value="{10,10}" />
+                <Property Name="AbsoluteSize" Value="{150,25}" />
+                <Property Name="Visible" Value="True" />
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>

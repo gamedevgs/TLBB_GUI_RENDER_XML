@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GUILayout>
+    <Window Type="DefaultWindow" Name="TestRoot">
+        <Property Name="UnifiedPosition" Value="{{0,0},{0,0}}" />
+        <Property Name="UnifiedSize" Value="{{1,0},{1,0}}" />
+        <Property Name="Text" Value="Test Root Window" />
+        
+        <Window Type="TLBB_MainFrame1" Name="MainFrame">
+            <Property Name="UnifiedPosition" Value="{{0,100},{0,100}}" />
+            <Property Name="UnifiedSize" Value="{{0,400},{0,300}}" />
+            <Property Name="Text" Value="Main Frame" />
+            
+            <Window Type="TLBB_Button" Name="Button1">
+                <Property Name="UnifiedPosition" Value="{{0,20},{0,20}}" />
+                <Property Name="UnifiedSize" Value="{{0,100},{0,40}}" />
+                <Property Name="Text" Value="Button 1" />
+            </Window>
+            
+            <Window Type="TLBB_Button" Name="Button2">
+                <Property Name="UnifiedPosition" Value="{{0,20},{0,80}}" />
+                <Property Name="UnifiedSize" Value="{{0,100},{0,40}}" />
+                <Property Name="Text" Value="Button 2" />
+                
+                <Window Type="TLBB_SimpleText" Name="NestedText">
+                    <Property Name="UnifiedPosition" Value="{{0,10},{0,5}}" />
+                    <Property Name="UnifiedSize" Value="{{0,80},{0,30}}" />
+                    <Property Name="Text" Value="Nested" />
+                </Window>
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>

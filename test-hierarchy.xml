@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window name="TestHierarchyWindow" type="DefaultWindow" width="800" height="600">
+    <!-- Level 0: Root Window -->
+    <Property name="Left">100</Property>
+    <Property name="Top">50</Property>
+    <Property name="Width">800</Property>
+    <Property name="Height">600</Property>
+    <Property name="BackgroundColour">FF333333</Property>
+    
+    <!-- Level 1: Main Container -->
+    <Window name="MainContainer" type="TLBB_MainFrame1" width="750" height="550">
+        <Property name="Left">25</Property>
+        <Property name="Top">25</Property>
+        <Property name="Width">750</Property>
+        <Property name="Height">550</Property>
+        
+        <!-- Level 2: Header Panel -->
+        <Window name="HeaderPanel" type="TLBB_MainFrame2" width="700" height="80">
+            <Property name="Left">25</Property>
+            <Property name="Top">25</Property>
+            <Property name="Width">700</Property>
+            <Property name="Height">80</Property>
+            
+            <!-- Level 3: Title Button -->
+            <Button name="TitleButton" type="TLBB_Button" width="200" height="30">
+                <Property name="Left">250</Property>
+                <Property name="Top">25</Property>
+                <Property name="Width">200</Property>
+                <Property name="Height">30</Property>
+                <Property name="Text">Hierarchy Test</Property>
+            </Button>
+        </Window>
+        
+        <!-- Level 2: Content Panel -->
+        <Window name="ContentPanel" type="TLBB_MainFrame3" width="700" height="350">
+            <Property name="Left">25</Property>
+            <Property name="Top">125</Property>
+            <Property name="Width">700</Property>
+            <Property name="Height">350</Property>
+            
+            <!-- Level 3: Left Panel -->
+            <Window name="LeftPanel" type="TLBB_MainFrame4" width="300" height="300">
+                <Property name="Left">25</Property>
+                <Property name="Top">25</Property>
+                <Property name="Width">300</Property>
+                <Property name="Height">300</Property>
+                
+                <!-- Level 4: Left Content -->
+                <Button name="LeftButton1" type="TLBB_ButtonCommon" width="250" height="40">
+                    <Property name="Left">25</Property>
+                    <Property name="Top">25</Property>
+                    <Property name="Width">250</Property>
+                    <Property name="Height">40</Property>
+                    <Property name="Text">Level 4 Button 1</Property>
+                </Button>
+                
+                <Button name="LeftButton2" type="TLBB_ButtonCommon" width="250" height="40">
+                    <Property name="Left">25</Property>
+                    <Property name="Top">80</Property>
+                    <Property name="Width">250</Property>
+                    <Property name="Height">40</Property>
+                    <Property name="Text">Level 4 Button 2</Property>
+                </Button>
+                
+                <!-- Level 4: Sub Panel -->
+                <Window name="SubPanel" type="TLBB_MainFrameNULL" width="200" height="150">
+                    <Property name="Left">25</Property>
+                    <Property name="Top">140</Property>
+                    <Property name="Width">200</Property>
+                    <Property name="Height">150</Property>
+                    
+                    <!-- Level 5: Deep nested button -->
+                    <Button name="DeepButton" type="TLBB_ButtonClose" width="150" height="30">
+                        <Property name="Left">25</Property>
+                        <Property name="Top">25</Property>
+                        <Property name="Width">150</Property>
+                        <Property name="Height">30</Property>
+                        <Property name="Text">Level 5 Deep</Property>
+                    </Button>
+                </Window>
+            </Window>
+            
+            <!-- Level 3: Right Panel -->
+            <Window name="RightPanel" type="TLBB_MainFrame2" width="350" height="300">
+                <Property name="Left">350</Property>
+                <Property name="Top">25</Property>
+                <Property name="Width">350</Property>
+                <Property name="Height">300</Property>
+                
+                <!-- Level 4: Right Content -->
+                <Button name="RightButton1" type="TLBB_Button" width="300" height="40">
+                    <Property name="Left">25</Property>
+                    <Property name="Top">25</Property>
+                    <Property name="Width">300</Property>
+                    <Property name="Height">40</Property>
+                    <Property name="Text">Level 4 Right Button</Property>
+                </Button>
+            </Window>
+        </Window>
+        
+        <!-- Level 2: Footer Panel -->
+        <Window name="FooterPanel" type="TLBB_MainFrameNULL" width="700" height="50">
+            <Property name="Left">25</Property>
+            <Property name="Top">495</Property>
+            <Property name="Width">700</Property>
+            <Property name="Height">50</Property>
+            
+            <!-- Level 3: Footer Buttons -->
+            <Button name="OKButton" type="TLBB_ButtonCommon" width="100" height="30">
+                <Property name="Left">480</Property>
+                <Property name="Top">10</Property>
+                <Property name="Width">100</Property>
+                <Property name="Height">30</Property>
+                <Property name="Text">OK</Property>
+            </Button>
+            
+            <Button name="CancelButton" type="TLBB_ButtonClose" width="100" height="30">
+                <Property name="Left">590</Property>
+                <Property name="Top">10</Property>
+                <Property name="Width">100</Property>
+                <Property name="Height">30</Property>
+                <Property name="Text">Cancel</Property>
+            </Button>
+        </Window>
+    </Window>
+</Window>

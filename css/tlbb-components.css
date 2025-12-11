@@ -1,0 +1,882 @@
+/* TLBB Component Styles */
+
+/* Base TLBB Element */
+.tlbb-element {
+    position: absolute !important; /* Needed: layout engine sets left/top relative to root */
+    box-sizing: border-box;
+    user-select: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    background-size: auto !important; /* Preserve imageset dimensions */
+    background-repeat: no-repeat !important;
+    font-size: 11px !important;
+}
+
+/* Hierarchical rendering support */
+.tlbb-element[data-hierarchical="true"] {
+    /* Root elements in hierarchical mode */
+    position: absolute; /* Positioned relative to canvas */
+}
+
+.tlbb-element[data-hierarchical="true"] .tlbb-element[data-hierarchical="true"] {
+    /* Child elements (nested) in hierarchical mode */
+    position: absolute; /* Still absolute, but within parent context */
+}
+
+/* Ensure proper containment for parent elements */
+.tlbb-element[data-hierarchical="true"][data-has-children="true"] {
+    /* Parent elements need to create positioning context for children */
+    position: relative;
+}
+
+/* Root elements in hierarchical mode should still be absolute to canvas */
+.render-canvas > .tlbb-element[data-hierarchical="true"] {
+    position: absolute; /* Root elements positioned relative to canvas */
+}
+
+/* Visual hierarchy indicators for hierarchical mode */
+.tlbb-element[data-hierarchical="true"] {
+    /* Add subtle border to show containment */
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.tlbb-element[data-hierarchical="true"]:hover {
+    /* Highlight hierarchy on hover */
+    box-shadow: inset 0 0 0 1px rgba(0, 122, 204, 0.3);
+}
+
+/* (tlbb-abs no longer required; kept for backward compatibility if present) */
+.tlbb-abs { position: absolute; }
+
+.tlbb-element:hover {
+    outline: 1px solid #007acc;
+}
+
+.tlbb-element.selected {
+    outline: 1px solid #42e601;
+    z-index: 1000;
+}
+
+/* Imageset-based elements */
+.tlbb-element.has-backimage {
+    /* Elements with BackImage should not have default background */
+    background-color: transparent !important;
+    /* Don't override borders - let hierarchy/imageset styles handle them */
+}
+
+/* TLBB ActionButton specific styles */
+.tlbb-element[data-type="TLBB_ActionButton"] {
+    /* Action buttons are typically item slots or interactive elements */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tlbb-element[data-type="TLBB_ActionButton"].has-back-image {
+    /* Remove default button styling when BackImage is present */
+    background: none !important;
+    border: none !important;
+    /* Keep the BackImage as primary visual */
+}
+
+.tlbb-element[data-type="TLBB_ActionButton"].empty {
+    /* Empty action buttons (equipment slots, etc.) */
+    opacity: 0.7;
+}
+
+.tlbb-element[data-type="TLBB_ActionButton"].empty:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Multi-state ActionButton */
+.tlbb-element[data-type="TLBB_ActionButton"].multi-state-action-button {
+    /* Ensure proper transitions for multi-state */
+    transition: background-image 0.2s ease, background-position 0.2s ease, transform 0.1s ease;
+}
+
+.tlbb-element[data-type="TLBB_ActionButton"].multi-state-action-button:hover {
+    transform: scale(1.02);
+}
+
+.tlbb-element[data-type="TLBB_ActionButton"].multi-state-action-button:active {
+    transform: scale(0.98);
+}
+
+/* Placeholder image styling */
+.tlbb-element.has-backimage.placeholder {
+    /* Add subtle glow for placeholder images */
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.tlbb-element.has-backimage.placeholder:hover {
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Missing image indicator */
+.missing-image-indicator {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 8px;
+    color: #999;
+    pointer-events: none;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1px;
+    border-radius: 2px;
+}
+
+/* TLBB Main Frames */
+.tlbb-mainframe0 {
+    /* Invisible container frame */
+    background: transparent;
+    border: none;
+}
+
+.tlbb-mainframe1 {
+    border: 2px solid #5a5a5a;
+    border-radius: 4px;
+    box-shadow: 0 1cqi 8px rgba(0, 0, 0, 0.3);
+}
+
+.tlbb-mainframe2 {
+    border: 1px solid #6a6a6a;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tlbb-mainframe3 {
+    border: 3px solid #7a7a7a;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tlbb-mainframe4 {
+    border: 2px solid #8a8a8a;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tlbb-mainframenull {
+    /* Invisible main container */
+    background: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+/* TLBB Buttons */
+.tlbb-button {
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    border: 1px solid #2c5d8a;
+    border-radius: 4px;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tlbb-button:hover {
+    background: linear-gradient(135deg, #5ba0f2 0%, #4687cd 100%);
+    transform: translateY(-1px);
+}
+
+.tlbb-button:active {
+    transform: translateY(0);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tlbb-buttonnull {
+    background: linear-gradient(135deg, #6a6a6a 0%, #5a5a5a 100%);
+    border: 1px solid #4a4a4a;
+}
+
+.tlbb-buttoncheck {
+    background: linear-gradient(135deg, #e2a44a 0%, #bd9135 100%);
+    border: 1px solid #8a6d2c;
+    position: relative;
+}
+
+.tlbb-buttoncheck.checked::after {
+    content: '✓';
+    position: absolute;
+    right: 4px;
+    top: 2px;
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.tlbb-buttonclose {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    border: 1px solid #a93226;
+    width: 14px;
+    height: 14px;
+    font-size: 10px;
+}
+
+.tlbb-buttonhelp {
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+    border: 1px solid #d68910;
+    width: 14px;
+    height: 14px;
+    font-size: 10px;
+}
+
+.tlbb-buttonhelp::after {
+    content: '?';
+    color: white;
+    font-weight: bold;
+}
+
+.tlbb-buttoncommon {
+    background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+    border: 1px solid #1e8449;
+}
+
+/* TLBB Frames */
+.tlbb-frame {
+    border: 2px solid #666;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.tlbb-framepet {
+    border: 2px solid #8e44ad;
+    border-radius: 8px;
+}
+
+.tlbb-frameplayer {
+    border: 2px solid #3498db;
+    border-radius: 6px;
+}
+
+.tlbb-frame-lace1,
+.tlbb-frame-lace2,
+.tlbb-frame-lace3,
+.tlbb-frame-lace4,
+.tlbb-frame-lace5 {
+    border: 3px solid #d4af37;
+    border-radius: 10px;
+    position: relative;
+}
+
+.tlbb-frame-lace1::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: 12px;
+}
+
+/* TLBB Text Elements */
+.tlbb-text {
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tlbb-simpletext {
+    color: #cccccc;
+    font-size: 12px;
+}
+
+
+
+.tlbb-simpletextinfo {
+    color: #9cdcfe;
+    font-size: 11px;
+    font-style: italic;
+}
+
+.tlbb-dragtitle {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    border-bottom: 1px solid #7f8c8d;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    cursor: move;
+    padding: 4px 8px;
+}
+
+/* TLBB Input Elements */
+.tlbb-editbox {
+    background: #2d2d2d;
+    border: 1px solid #555;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 3px;
+}
+
+.tlbb-editbox:focus {
+    outline: none;
+    border-color: #007acc;
+    box-shadow: 0 0 4px rgba(0, 122, 204, 0.3);
+}
+
+/* TLBB Action Button */
+.tlbb-actionbutton {
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+    border: 2px solid #7f8c8d;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tlbb-actionbutton:hover {
+    border-color: #3498db;
+    transform: scale(1.05);
+}
+
+.tlbb-actionbutton.empty {
+    background: rgba(255, 255, 255, 0.1);
+    border-style: dashed;
+}
+
+/* TLBB List Controls */
+.tlbb-listbox {
+    background: #2d2d2d;
+    border: 1px solid #555;
+    overflow-y: auto;
+}
+
+.tlbb-multicolumnlist {
+    background: #2d2d2d;
+    border: 1px solid #555;
+    display: grid;
+    gap: 1px;
+}
+
+/* TLBB Progress Bar */
+.tlbb-progressbar {
+    background: #2d2d2d;
+    border: 1px solid #555;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+
+.tlbb-progressbar .progress-fill {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+/* TLBB Scroll Bar */
+.tlbb-scrollbar {
+    background: #2d2d2d;
+    border: 1px solid #555;
+    position: relative;
+}
+
+.tlbb-scrollbar.vertical {
+    width: 16px;
+}
+
+.tlbb-scrollbar.horizontal {
+    height: 16px;
+}
+
+.tlbb-scrollbar .scroll-thumb {
+    background: #666;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.tlbb-scrollbar .scroll-thumb:hover {
+    background: #777;
+}
+
+/* TLBB Static Image */
+.tlbb-staticimage {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* TLBB Mesh Window (3D Display) */
+.tlbb-meshwindow {
+    background: radial-gradient(circle, #1a1a1a 0%, #0d0d0d 100%);
+    border: 2px solid #444;
+    position: relative;
+}
+
+.tlbb-meshwindow::after {
+    content: '3D';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #666;
+    font-size: 12px;
+    pointer-events: none;
+}
+
+/* Special Elements */
+.tlbb-specialframe01 {
+    background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+    border: 3px solid #663399;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(142, 68, 173, 0.3);
+}
+
+.tlbb-specialtitle01 {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 6px 6px 0 0;
+}
+
+.tlbb-specialclose {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    border: 1px solid #a93226;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    line-height: 18px;
+}
+
+/* Text Overlays */
+.text-overlay {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 2px 6px;
+    font-size: 10px;
+    border-radius: 3px;
+    pointer-events: none;
+    z-index: 1001;
+    white-space: nowrap;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* XML Structure Tree */
+.xml-tree { font-family: Consolas,monospace; font-size:12px; line-height:1.3; }
+.xml-tree .tree-item { margin:0; padding:0; }
+.xml-tree .tree-row { padding:1px 4px 1px 2px; border-radius:3px; }
+.xml-tree .tree-row:hover { background:#2a3138; }
+.xml-tree .tree-item.selected > .tree-row { background:#79b120; outline:1px solid #4aa3ff55; }
+.xml-tree .tree-toggle { cursor:pointer; }
+
+/* Blink highlight for selected GUI element */
+@keyframes blinkBorder { 0% { box-shadow:0 0 0 0 rgba(66,230,1,0.9); } 50% { box-shadow:0 0 6px 2px rgba(66,230,1,0.8); } 100% { box-shadow:0 0 0 0 rgba(66,230,1,0); } }
+.blink-highlight { animation: blinkBorder 0.9s ease-out; }
+
+/* Drag & Resize */
+.tlbb-element.selected { position:absolute; }
+.tlbb-transform-handles { position:absolute; inset:0; pointer-events:none; }
+.tlbb-resize-handle { position:absolute; width:8px; height:8px; background:#42e601; border:1px solid #173b00; border-radius:2px; box-sizing:border-box; pointer-events:auto; cursor:pointer; }
+.tlbb-resize-handle.nw { top:-4px; left:-4px; cursor:nwse-resize; }
+.tlbb-resize-handle.ne { top:-4px; right:-4px; cursor:nesw-resize; }
+.tlbb-resize-handle.sw { bottom:-4px; left:-4px; cursor:nesw-resize; }
+.tlbb-resize-handle.se { bottom:-4px; right:-4px; cursor:nwse-resize; }
+.tlbb-resize-handle.n { top:-4px; left:50%; transform:translateX(-50%); cursor:ns-resize; }
+.tlbb-resize-handle.s { bottom:-4px; left:50%; transform:translateX(-50%); cursor:ns-resize; }
+.tlbb-resize-handle.w { left:-4px; top:50%; transform:translateY(-50%); cursor:ew-resize; }
+.tlbb-resize-handle.e { right:-4px; top:50%; transform:translateY(-50%); cursor:ew-resize; }
+.tlbb-element.dragging { outline:1px dashed #ffd54f; }
+.tlbb-element.resizing { outline:1px solid #ff9800; }
+
+.text-overlay.element-name {
+    background: rgba(0, 122, 204, 0.9);
+}
+
+.text-overlay.control-type {
+    background: rgba(255, 107, 53, 0.9);
+}
+
+.text-overlay.position-info {
+    background: rgba(39, 174, 96, 0.9);
+}
+
+.text-overlay.size-info {
+    background: rgba(155, 89, 182, 0.9);
+}
+
+.text-overlay.text-value {
+    background: rgba(241, 196, 15, 0.9);
+    color: #333;
+}
+
+/* Hidden Elements */
+.tlbb-element[data-visible="false"] {
+    opacity: 0.35; /* keep a ghosted look */
+    /* Allow interaction so user can still select/transform hidden elements */
+    pointer-events: auto;
+    outline: 1px dashed rgba(255,255,255,0.4);
+}
+
+/* Default Window */
+.defaultwindow {
+    background: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+/* Missing imageset placeholder */
+.missing-imageset {
+    background-color: #2a2a2a !important;
+    border: 1px dashed #666 !important;
+    position: relative;
+    min-width: 20px !important;
+    min-height: 20px !important;
+}
+
+.missing-imageset::after {
+    content: "📷❌";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10px;
+    color: #ff6b6b;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+
+/* Show imageset name in missing placeholder when in debug mode */
+.debug-hierarchy .missing-imageset::before {
+    content: attr(title);
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    font-size: 8px;
+    color: #888;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1px 3px;
+    border-radius: 2px;
+    white-space: nowrap;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Toast notifications */
+#tlbb-toast-container { position:fixed; bottom:16px; left:50%; transform:translateX(-50%); z-index:4000; display:flex; flex-direction:column; gap:6px; pointer-events:none; }
+.tlbb-toast { background:rgba(0,0,0,0.85); color:#fff; padding:6px 12px; border-radius:4px; font-size:12px; opacity:0; transform:translateY(6px) scale(.97); transition:opacity .25s, transform .25s; box-shadow:0 2px 6px rgba(0,0,0,0.4); backdrop-filter:blur(4px); border:1px solid rgba(255,255,255,0.08); }
+.tlbb-toast.show { opacity:1; transform:translateY(0) scale(1); }
+
+/* ============================
+   DOM HIERARCHY LEVEL STYLES
+   Styles to differentiate parent-child levels in XML DOM rendering
+   Only active when .show-hierarchy class is present
+   ============================ */
+
+/* Level indicators - add visual cues for hierarchy depth */
+.show-hierarchy .tlbb-element[data-level="0"] {
+    border: 2px solid #ff6b6b !important; /* Root level - Red */
+    border-radius: 4px !important;
+    box-shadow: 0 0 6px rgba(255, 107, 107, 0.3) !important;
+    position: relative;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.06), rgba(255, 107, 107, 0.02)) !important;
+}
+
+.show-hierarchy .tlbb-element[data-level="1"] {
+    border: 2px solid #4ecdc4 !important; /* Level 1 - Teal */
+    border-radius: 3px !important;
+    box-shadow: 0 0 4px rgba(78, 205, 196, 0.3) !important;
+    margin-left: 2px;
+    background: linear-gradient(135deg, rgba(78, 205, 196, 0.06), rgba(78, 205, 196, 0.02)) !important;
+}
+
+.show-hierarchy .tlbb-element[data-level="2"] {
+    border: 2px solid #45b7d1 !important; /* Level 2 - Blue */
+    border-radius: 3px !important;
+    box-shadow: 0 0 4px rgba(69, 183, 209, 0.3) !important;
+    margin-left: 4px;
+    background: linear-gradient(135deg, rgba(69, 183, 209, 0.06), rgba(69, 183, 209, 0.02)) !important;
+}
+
+.show-hierarchy .tlbb-element[data-level="3"] {
+    border: 2px solid #96ceb4 !important; /* Level 3 - Green */
+    border-radius: 3px !important;
+    box-shadow: 0 0 4px rgba(150, 206, 180, 0.3) !important;
+    margin-left: 6px;
+    background: linear-gradient(135deg, rgba(150, 206, 180, 0.06), rgba(150, 206, 180, 0.02)) !important;
+}
+
+.show-hierarchy .tlbb-element[data-level="4"] {
+    border: 2px solid #ffeaa7 !important; /* Level 4 - Yellow */
+    border-radius: 3px !important;
+    box-shadow: 0 0 4px rgba(255, 234, 167, 0.3) !important;
+    margin-left: 8px;
+    background: linear-gradient(135deg, rgba(255, 234, 167, 0.06), rgba(255, 234, 167, 0.02)) !important;
+}
+
+.show-hierarchy .tlbb-element[data-level="5"] {
+    border: 2px solid #fd79a8 !important; /* Level 5 - Pink */
+    border-radius: 3px !important;
+    box-shadow: 0 0 4px rgba(253, 121, 168, 0.3) !important;
+    margin-left: 10px;
+    background: linear-gradient(135deg, rgba(253, 121, 168, 0.06), rgba(253, 121, 168, 0.02)) !important;
+}
+
+.show-hierarchy .tlbb-element[data-level="6"] {
+    border: 2px solid #a29bfe !important; /* Level 6 - Purple */
+    border-radius: 3px !important;
+    box-shadow: 0 0 4px rgba(162, 155, 254, 0.3) !important;
+    margin-left: 12px;
+}
+
+.show-hierarchy .tlbb-element[data-level="7"] {
+    border: 2px solid #fd7f6f !important; /* Level 7 - Coral */
+    border-radius: 3px !important;
+    box-shadow: 0 0 4px rgba(253, 127, 111, 0.3) !important;
+    margin-left: 14px;
+}
+
+.show-hierarchy .tlbb-element[data-level="8"] {
+    border: 2px solid #7bd0c1 !important; /* Level 8 - Mint */
+    border-radius: 3px !important;
+    box-shadow: 0 0 4px rgba(123, 208, 193, 0.3) !important;
+    margin-left: 16px;
+}
+
+.show-hierarchy .tlbb-element[data-level="9"] {
+    border: 2px solid #ffb347 !important; /* Level 9 - Orange */
+    border-radius: 3px !important;
+    box-shadow: 0 0 4px rgba(255, 179, 71, 0.3) !important;
+    margin-left: 18px;
+}
+
+/* For levels 10+ use a cycling pattern */
+.show-hierarchy .tlbb-element[data-level]:not([data-level="0"]):not([data-level="1"]):not([data-level="2"]):not([data-level="3"]):not([data-level="4"]):not([data-level="5"]):not([data-level="6"]):not([data-level="7"]):not([data-level="8"]):not([data-level="9"]) {
+    border: 2px solid #ddd !important; /* Default for 10+ levels */
+    border-radius: 3px !important;
+    box-shadow: 0 0 4px rgba(221, 221, 221, 0.3) !important;
+    margin-left: 20px;
+}
+
+/* Enhanced hover effects for hierarchy levels */
+.show-hierarchy .tlbb-element[data-level]:hover {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.6) !important;
+    border-width: 3px !important;
+    transform: scale(1.02);
+    transition: all 0.2s ease-in-out;
+    filter: brightness(1.1);
+    background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Active/Selected state enhancement */
+.show-hierarchy .tlbb-element[data-level].selected {
+    border-width: 3px !important;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8) !important;
+    transform: scale(1.03);
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    filter: brightness(1.2);
+}
+
+/* Parent indicator - adds a small icon to show elements that have children */
+.tlbb-element[data-has-children="true"]::before {
+    content: "▼";
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.6);
+    z-index: 1001;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1px 3px;
+    border-radius: 2px;
+}
+
+/* Collapsed state for parent elements */
+.tlbb-element[data-has-children="true"][data-collapsed="true"]::before {
+    content: "▶";
+}
+
+/* Child count indicator */
+.tlbb-element[data-child-count]::after {
+    content: attr(data-child-count);
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    font-size: 7px;
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1px 4px;
+    border-radius: 2px;
+    min-width: 10px;
+    text-align: center;
+    z-index: 1002;
+    pointer-events: none;
+}
+
+/* Selection highlighting for hierarchy */
+.tlbb-element[data-level].selected {
+    outline: 2px solid #42e601 !important;
+    background-color: rgba(66, 230, 1, 0.1) !important;
+}
+
+/* Different selection colors based on level */
+.tlbb-element[data-level="0"].selected {
+    outline-color: #ff6b6b !important;
+    background-color: rgba(255, 107, 107, 0.1) !important;
+}
+
+.tlbb-element[data-level="1"].selected {
+    outline-color: #4ecdc4 !important;
+    background-color: rgba(78, 205, 196, 0.1) !important;
+}
+
+.tlbb-element[data-level="2"].selected {
+    outline-color: #45b7d1 !important;
+    background-color: rgba(69, 183, 209, 0.1) !important;
+}
+
+/* Level number indicator in debug mode */
+.debug-hierarchy .tlbb-element {
+    position: relative;
+}
+
+.debug-hierarchy .tlbb-element::before {
+    content: "L" attr(data-level);
+    position: absolute;
+    top: -18px;
+    left: 2px;
+    background: rgba(0,0,0,0.85);
+    color: white;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 6px;
+    z-index: 1000;
+    pointer-events: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    font-family: 'Courier New', monospace;
+}
+
+/* Enhanced hierarchy depth indication with subtle background gradients */
+.tlbb-element[data-level="0"] {
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.06), rgba(255, 107, 107, 0.02)) !important;
+}
+
+.tlbb-element[data-level="1"] {
+    background: linear-gradient(135deg, rgba(78, 205, 196, 0.06), rgba(78, 205, 196, 0.02)) !important;
+}
+
+.tlbb-element[data-level="2"] {
+    background: linear-gradient(135deg, rgba(69, 183, 209, 0.06), rgba(69, 183, 209, 0.02)) !important;
+}
+
+.tlbb-element[data-level="3"] {
+    background: linear-gradient(135deg, rgba(150, 206, 180, 0.06), rgba(150, 206, 180, 0.02)) !important;
+}
+
+.tlbb-element[data-level="4"] {
+    background: linear-gradient(135deg, rgba(255, 234, 167, 0.06), rgba(255, 234, 167, 0.02)) !important;
+}
+
+.tlbb-element[data-level="5"] {
+    background: linear-gradient(135deg, rgba(253, 121, 168, 0.06), rgba(253, 121, 168, 0.02)) !important;
+}
+
+/* Hierarchy tree lines - connecting parent to children */
+.tlbb-element[data-level]:not([data-level="0"])::after {
+    content: "";
+    position: absolute;
+    left: -3px;
+    top: -10px;
+    width: 1px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+}
+
+/* Root level special styling */
+.tlbb-element[data-level="0"] {
+    font-weight: bold;
+    border-width: 2px !important;
+}
+
+/* Debug mode - shows level numbers */
+.debug-hierarchy .tlbb-element[data-level]::before {
+    content: "L" attr(data-level);
+    position: absolute;
+    top: -12px;
+    left: 0;
+    font-size: 8px;
+    color: #ffd700;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1px 3px;
+    border-radius: 2px;
+    z-index: 1003;
+    pointer-events: none;
+}
+
+/* Toggle button styles */
+.toggle-btn.active {
+    background-color: #007acc !important;
+    color: white !important;
+}
+
+.toggle-btn.active .menu-icon {
+    color: #fff !important;
+}
+
+/* ============================
+   IMAGESET ELEMENT VISIBILITY
+   Toggle visibility of elements based on imageset presence
+   ============================ */
+
+/* Dim imageset elements when show-imageset is NOT active (but keep them clickable) */
+:not(.show-imageset) .tlbb-element[data-has-imageset="true"] {
+    opacity: 0.6 !important;
+    filter: grayscale(0.5) !important;
+}
+
+/* Dim non-imageset elements when imageset-only mode is active */
+.show-imageset.imageset-only .tlbb-element[data-has-imageset="false"] {
+    opacity: 0.2 !important;
+    pointer-events: none !important;
+    filter: grayscale(1) blur(1px) !important;
+}
+
+/* Highlight imageset elements when show-imageset is active */
+.show-imageset .tlbb-element[data-has-imageset="true"] {
+    box-shadow: 0 0 6px rgba(100, 200, 255, 0.3) !important;
+    border: 1px solid rgba(100, 200, 255, 0.4) !important;
+}
+
+/* Enhanced hover for imageset elements */
+.show-imageset .tlbb-element[data-has-imageset="true"]:hover {
+    box-shadow: 0 0 10px rgba(100, 200, 255, 0.6) !important;
+    border-color: rgba(100, 200, 255, 0.8) !important;
+    transform: scale(1.01) !important;
+}
+
+/* Imageset indicator icon - positioned to avoid conflicts */
+/* .show-imageset .tlbb-element[data-has-imageset="true"]::after {
+    content: "🖼️";
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    font-size: 8px;
+    background: rgba(100, 200, 255, 0.8);
+    border-radius: 3px;
+    width: 12px;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1004;
+    pointer-events: none;
+    border: 1px solid rgba(100, 200, 255, 1);
+    font-size: 6px;
+} */

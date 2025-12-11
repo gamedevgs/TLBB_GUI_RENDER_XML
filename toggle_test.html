@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Test</title>
+    <style>
+        #console { 
+            background: #000; 
+            color: #0f0; 
+            padding: 10px; 
+            font-family: monospace; 
+            height: 200px; 
+            overflow-y: auto; 
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h2>TLBB Toggle Render Mode Test</h2>
+    <button id="toggleRenderModeBtn">Toggle Hierarchical Mode</button>
+    <div id="console"></div>
+
+    <script src="js/utils/position-calculator.js"></script>
+    <script src="js/core/gui-renderer.js"></script>
+
+    <script>
+        // Create console logger
+        const consoleDiv = document.getElementById('console');
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            consoleDiv.innerHTML += `[${timestamp}] ${type.toUpperCase()}: ${message}\n`;
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+            console.log(`[${type}] ${message}`);
+        }
+
+        // Initialize GUI Renderer
+        let guiRenderer = null;
+        try {
+            if (window.GUIRenderer) {
+                guiRenderer = new GUIRenderer();
+                log('GUIRenderer initialized successfully');
+            } else {
+                log('GUIRenderer class not found!', 'error');
+            }
+        } catch (error) {
+            log(`Error initializing GUIRenderer: ${error.message}`, 'error');
+        }
+
+        // Test toggle function
+        function handleToggleRenderMode() {
+            log('handleToggleRenderMode called');
+            
+            if (!guiRenderer) {
+                log('GUI Renderer not initialized', 'error');
+                return;
+            }
+
+            try {
+                const currentMode = guiRenderer.isHierarchicalMode();
+                log(`Current mode: ${currentMode ? 'Hierarchical' : 'Flat'}`);
+                
+                const newMode = !currentMode;
+                guiRenderer.setHierarchicalMode(newMode);
+                
+                const modeText = newMode ? 'Hierarchical' : 'Flat';
+                log(`Switched to ${modeText} rendering mode`, 'success');
+                
+                // Update button text
+                const btn = document.getElementById('toggleRenderModeBtn');
+                if (btn) {
+                    btn.textContent = newMode ? 'Switch to Flat Mode' : 'Switch to Hierarchical Mode';
+                }
+            } catch (error) {
+                log(`Error in handleToggleRenderMode: ${error.message}`, 'error');
+                log(`Stack: ${error.stack}`, 'error');
+            }
+        }
+
+        // Setup event listener
+        document.addEventListener('DOMContentLoaded', () => {
+            log('DOM loaded');
+            
+            const btn = document.getElementById('toggleRenderModeBtn');
+            if (btn) {
+                btn.addEventListener('click', handleToggleRenderMode);
+                log('Event listener attached to toggle button');
+            } else {
+                log('Toggle button not found!', 'error');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TLBB XML GUI Renderer</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/display-enhancements.css">
+    <link rel="stylesheet" href="css/tlbb-components.css">
+    <link rel="stylesheet" href="css/property-panel.css">
+    <link rel="stylesheet" href="css/edit-modal.css">
+    <!-- Font Awesome (professional icon font) - integrity removed due to mismatch blocking load -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" />
+
+</head>
+
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="app-header">
+            <nav class="menu-bar" role="menubar">
+                <ul class="menu-root">
+                    <li class="menu-item has-sub" role="none">
+                        <span role="menuitem" tabindex="0"><span class="menu-top-icon"><i
+                                    class="fa-solid fa-folder-open"></i></span><span
+                                class="menu-top-label">File</span></span>
+                        <ul class="submenu" role="menu">
+                            <li role="none"><button id="loadXmlBtn" role="menuitem"><span class="menu-icon"><i
+                                            class="fa-solid fa-file-code"></i></span>Load XML File...</button></li>
+                            <li role="none"><button id="loadXmlFolderBtn" role="menuitem"><span class="menu-icon"><i
+                                            class="fa-solid fa-folder-tree"></i></span>Load XML Folder...</button>
+                            </li>
+                            <li role="none"><button id="saveXmlBtn" role="menuitem"><span class="menu-icon"><i
+                                            class="fa-solid fa-floppy-disk"></i></span>Save XML (Export)</button></li>
+                            <li role="none"><button id="copyXmlBtn" role="menuitem"><span class="menu-icon"><i
+                                            class="fa-solid fa-copy"></i></span>Copy XML to Clipboard</button></li>
+                            <li role="none"><button id="clearCacheBtn" role="menuitem"><span class="menu-icon"><i
+                                            class="fa-solid fa-arrows-rotate"></i></span>Reset / Default Window</button>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-sub" role="none">
+                        <span role="menuitem" tabindex="0"><span class="menu-top-icon"><i
+                                    class="fa-solid fa-pen-to-square"></i></span><span
+                                class="menu-top-label">Edit</span></span>
+                        <ul class="submenu" role="menu">
+                            <li role="none"><button id="undoBtn" role="menuitem" disabled><span class="menu-icon"><i
+                                            class="fa-solid fa-rotate-left"></i></span>Undo <span
+                                        style="float:right;opacity:.6;">Ctrl+Z</span></button></li>
+                            <li role="none"><button id="redoBtn" role="menuitem" disabled><span class="menu-icon"><i
+                                            class="fa-solid fa-rotate-right"></i></span>Redo <span
+                                        style="float:right;opacity:.6;">Ctrl+Y</span></button></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-sub" role="none">
+                        <span role="menuitem" tabindex="0"><span class="menu-top-icon"><i
+                                    class="fa-solid fa-eye"></i></span><span class="menu-top-label">View</span></span>
+                        <ul class="submenu" role="menu">
+                            <li role="none" class="submenu-sep"></li>
+                            <li role="none"><button id="zoomInBtn" role="menuitem"><span class="menu-icon"><i
+                                            class="fa-solid fa-magnifying-glass-plus"></i></span>Zoom In</button></li>
+                            <li role="none"><button id="zoomOutBtn" role="menuitem"><span class="menu-icon"><i
+                                            class="fa-solid fa-magnifying-glass-minus"></i></span>Zoom Out</button></li>
+                            <li role="none"><button id="resetZoomBtn" role="menuitem"><span class="menu-icon"><i
+                                            class="fa-solid fa-compress"></i></span>Reset Zoom</button></li>
+                            <li role="none" class="submenu-sep"></li>
+                            <li role="none"><button id="toggleHierarchyBtn" role="menuitem" class="toggle-btn"><span class="menu-icon"><i
+                                            class="fa-solid fa-layer-group"></i></span>Show Hierarchy Levels</button></li>
+                            <li role="none"><button id="debugHierarchyBtn" role="menuitem" class="toggle-btn"><span class="menu-icon"><i
+                                            class="fa-solid fa-sitemap"></i></span>Debug Hierarchy Numbers</button></li>
+                            <li role="none"><button id="toggleImagesetBtn" role="menuitem" class="toggle-btn"><span class="menu-icon"><i
+                                            class="fa-solid fa-image"></i></span>Show Imageset Elements</button></li>
+                            <li role="none"><button id="imagesetOnlyBtn" role="menuitem" class="toggle-btn"><span class="menu-icon"><i
+                                            class="fa-solid fa-images"></i></span>Imageset Only Mode</button></li>
+                            <li role="none" class="submenu-sep"></li>
+                           
+                        </ul>
+                    </li>
+                    <li class="menu-item has-sub" role="none">
+                        <span role="menuitem" tabindex="0"><span class="menu-top-icon"><i
+                                    class="fa-solid fa-puzzle-piece"></i></span><span
+                                class="menu-top-label">Layout</span></span>
+                        <ul class="submenu" role="menu">
+                            <li role="none"><button id="btnTest" role="menuitem"><span class="menu-icon"><i
+                                            class="fa-solid fa-flask"></i></span>Load Test Layout</button></li>
+                            <li role="none"><button id="btnTestImagesets" role="menuitem"><span class="menu-icon"><i
+                                            class="fa-solid fa-image"></i></span>Test Imagesets</button></li>
+                            <li role="none"><button id="checkErrXmlBtn" role="menuitem"><span class="menu-icon"><i
+                                            class="fa-solid fa-circle-check"></i></span>Check XML Errors</button></li>
+                            <li role="none" class="submenu-sep"></li>
+                            <li role="none"><button id="toggleRenderModeBtn" role="menuitem"><span class="menu-icon"><i
+                                            class="fa-solid fa-sitemap"></i></span>Toggle Hierarchical Mode</button></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-sub" role="none">
+                        <span role="menuitem" tabindex="0"><span class="menu-top-icon"><i
+                                    class="fa-solid fa-circle-question"></i></span><span
+                                class="menu-top-label">Help</span></span>
+                        <ul class="submenu" role="menu">
+                            <li role="none"><button role="menuitem"
+                                    onclick="alert('TLBB GUI Renderer - MenuStrip phiên bản demo');"><span
+                                        class="menu-icon"><i class="fa-solid fa-circle-info"></i></span>About</button>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- Hidden original file inputs (kept for JS hooks) -->
+                <input type="file" id="xmlFileInput" accept=".xml" style="display:none;">
+                <input type="file" id="xmlFolderInput" webkitdirectory directory multiple style="display:none;" />
+            </nav>
+            <div class="viewport-controls">
+                <label for="viewportSelect">Viewport:</label>
+                <select id="viewportSelect" class="select">
+                    <option value="1024x768">1024×768 (4:3)</option>
+                    <option value="1280x840">1280×840 (1.52:1)</option>
+                    <option value="1280x960">1280×960 (4:3)</option>
+                    <option value="1366x768">1366×768 (16:9)</option>
+                    <option value="1440x900">1440×900 (16:10)</option>
+                    <option value="1600x900">1600×900 (16:9)</option>
+                    <option value="1920x1080">1920×1080 (16:9)</option>
+                    <option value="custom">Custom...</option>
+                </select>
+                <label for="viewportSelect">Hiển thị:</label>
+                <select id="displayModeSelect" class="select">
+                    <option value="element">Element Name</option>
+                    <option value="type">Control Type</option>
+                    <option value="position">Position Info</option>
+                    <option value="size">Size Info</option>
+                    <option value="text" selected>Text Value</option>
+                </select>
+            </div>
+
+
+        </header>
+
+        <!-- Main Layout -->
+        <div class="main-layout">
+            <!-- Left Sidebar - XML Structure -->
+            <aside class="sidebar left-sidebar">
+
+                <div class="panel">
+                    <h3><span class="panel-icon"><i class="fa-solid fa-code"></i></span>XML Files</h3>
+                    <div style="margin:4px 0;">
+                        <input id="xmlFileSearch" type="text" placeholder="Search file..."
+                            style="width:100%;padding:4px;font-size:12px;box-sizing:border-box;" />
+                    </div>
+                    <div id="xmlFileList" class="xml-tree" style="max-height:380px; overflow:auto; font-size:12px;">
+                    </div>
+                </div>
+                <div class="panel">
+                    <h3><span class="panel-icon"><i class="fa-solid fa-diagram-project"></i></span>XML Structure</h3>
+                    <div style="margin:4px 0 6px;">
+                        <input id="xmlStructureSearch" type="text" placeholder="Search name/type..."
+                            style="width:100%;padding:4px;font-size:12px;box-sizing:border-box;">
+                    </div>
+                    <div id="xmlStructureTree" class="xml-tree"></div>
+                </div>
+            </aside>
+
+            <!-- Center - Canvas -->
+            <main class="canvas-container">
+                <div id="renderCanvas" class="render-canvas">
+                    <div id="canvasContent" class="canvas-content">
+                        <!-- Rendered GUI will appear here -->
+                    </div>
+                </div>
+
+                <!-- Canvas Controls -->
+                <div class="canvas-controls">
+                    <span>Viewport: <span id="viewportSize">1024×768</span></span>
+                    <span>Zoom: <span id="zoomLevel">100%</span></span>
+                    <span>Mouse: <span id="mousePosition">0, 0</span></span>
+                </div>
+            </main>
+
+            <!-- Right Sidebar - Properties -->
+            <aside class="sidebar right-sidebar">
+                <div class="panel">
+                    <div>
+                        <div
+                            style="display:flex;align-items:center;gap:14px;padding:4px 0 8px 0; background: #2d2d30;border-bottom: 1px solid #464647;">
+                            <h3>
+                                <span class="panel-icon" style="margin-right:7px;color:#007acc;"><i
+                                        class="fa-solid fa-list"></i></span>
+                                Properties
+                            </h3>
+                            <!-- Auto-save indicator replacing save button -->
+                            <div class="auto-save-indicator" style="padding:5px 18px;background:#28a745;border:none;border-radius:5px;color:#fff;font-weight:bold;font-size:10px;opacity:0.8;">
+                                <i class="fa-solid fa-clock" style="margin-right:6px;"></i>Auto save 1s
+                            </div>
+                            <!-- Hidden save button for backward compatibility -->
+                            <button class="property-save-btn" style="display:none;">
+                                <i class="fa-solid fa-floppy-disk" style="margin-right:6px;"></i>Lưu
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="propertyPanel" class="property-panel">
+                        <p class="no-selection">Chọn một phần tử để xem thuộc tính</p>
+                        <div id="propertyContent"></div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h3><span class="panel-icon"><i class="fa-solid fa-clipboard-list"></i></span>Log</h3>
+                    <div id="logPanel" class="log-panel">
+                        <div class="log-entry info">Ready to load XML file...</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Status Bar -->
+        <footer class="status-bar">
+            <span id="statusText">Ready</span>
+            <span id="elementCount">Elements: 0</span>
+            <span id="renderModeStatus">Mode: Hierarchical</span>
+        </footer>
+    </div>
+
+    <!-- JavaScript Modules -->
+    <script>
+        // Debug: Log script loading
+        // console.log('Loading JavaScript modules...');
+
+        // Error handler for script loading
+        window.addEventListener('error', function (e) {
+            console.error('Script error:', e.filename, e.lineno, e.error);
+        });
+    </script>
+    <script src="js/utils/constants.js"></script>
+    <script src="js/utils/string-dictionary.js"></script>
+    <script src="js/utils/texture-decoder.js"></script>
+    <script src="js/utils/imageset-loader.js"></script>
+    <script src="js/utils/multi-state-image-helper.js"></script>
+    <script src="js/utils/position-calculator.js"></script>
+    <script src="js/utils/tlbb-layout-calculator.js"></script>
+    <script src="js/utils/color-parser.js"></script>
+    <script src="js/parsers/xml-parser.js"></script>
+    <script src="js/parsers/property-parser.js"></script>
+    <script src="js/renderers/base-renderer.js"></script>
+    <script src="js/renderers/window-renderer.js"></script>
+    <script src="js/renderers/button-renderer.js"></script>
+    <script src="js/renderers/text-renderer.js"></script>
+    <script src="js/renderers/frame-renderer.js"></script>
+    <script src="js/ui/property-panel.js"></script>
+    <script src="js/ui/xml-tree.js"></script>
+    <script src="js/ui/canvas-controls.js"></script>
+    <script src="js/ui/zoom-manager.js"></script>
+    <script src="js/ui/event-manager.js"></script>
+    <script src="js/core/gui-renderer.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        // Basic menu strip interaction (click & keyboard)
+        (function () {
+            const bar = document.querySelector('.menu-bar');
+            if (!bar) return;
+            const items = [...bar.querySelectorAll('.menu-item')];
+            function closeAll(except) { items.forEach(it => { if (it !== except) it.classList.remove('open'); }); }
+            items.forEach(it => {
+                const trigger = it.querySelector(':scope > span');
+                if (!trigger) return;
+                trigger.addEventListener('click', e => { const open = it.classList.contains('open'); closeAll(); if (!open) it.classList.add('open'); });
+                trigger.addEventListener('keydown', e => {
+                    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') { it.classList.add('open'); const first = it.querySelector('.submenu button, .submenu select'); first && first.focus(); e.preventDefault(); }
+                    if (e.key === 'ArrowRight') { const idx = items.indexOf(it); const next = items[(idx + 1) % items.length]; next.querySelector(':scope > span').focus(); e.preventDefault(); }
+                    if (e.key === 'ArrowLeft') { const idx = items.indexOf(it); const prev = items[(idx - 1 + items.length) % items.length]; prev.querySelector(':scope > span').focus(); e.preventDefault(); }
+                });
+            });
+            document.addEventListener('click', e => { if (!bar.contains(e.target)) closeAll(); });
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
+        })();
+    </script>
+
+    <script>
+        console.log('All scripts loaded. DOM ready state:', document.readyState);
+    </script>
+</body>
+
+</html>

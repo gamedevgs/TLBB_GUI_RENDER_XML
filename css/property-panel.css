@@ -1,0 +1,274 @@
+/* Property Panel Specific Styles */
+
+.property-panel {
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.property-group {
+    margin-bottom: 15px;
+    border: 1px solid #404040;
+    border-radius: 4px;
+    background: #2a2a2a;
+}
+
+.property-group-header {
+    background: #333;
+    padding: 6px 10px;
+    font-weight: 600;
+    border-bottom: 1px solid #404040;
+    color: #fff;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.property-group-content {
+    padding: 8px;
+}
+
+.property-item {
+    margin-bottom: 6px;
+    padding: 4px 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.property-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.property-name {
+    font-weight: 600;
+    color: #9cdcfe;
+    margin-bottom: 2px;
+    font-size: 11px;
+}
+
+.property-value {
+    color: #ce9178;
+    word-break: break-word;
+    font-size: 11px;
+    font-family: 'Courier New', monospace;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2px 4px;
+    border-radius: 2px;
+    border: 1px solid #404040;
+}
+
+.property-value.color {
+    position: relative;
+    padding-left: 20px;
+}
+
+.property-value.color::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border: 1px solid #666;
+    border-radius: 2px;
+    background: var(--color-preview);
+}
+
+.property-value.position,
+.property-value.size {
+    color: #b5cea8;
+}
+
+.property-value.text {
+    color: #dcdcaa;
+}
+
+.property-value.boolean {
+    color: #569cd6;
+    font-weight: 600;
+}
+
+.property-value.number {
+    color: #b5cea8;
+}
+
+.property-value.image {
+    color: #c586c0;
+}
+
+.property-value.event {
+    color: #4fc1ff;
+}
+
+/* Property Type Icons */
+.property-name::before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 20px;
+    margin-right: 4px;
+    vertical-align: middle;
+    background-size: contain;
+    opacity: 0.7;
+}
+
+.property-name[data-type="position"]::before {
+    content: '📍';
+}
+
+.property-name[data-type="size"]::before {
+    content: '📏';
+}
+
+.property-name[data-type="color"]::before {
+    content: '🎨';
+}
+
+.property-name[data-type="text"]::before {
+    content: '📝';
+}
+
+.property-name[data-type="image"]::before {
+    content: '🖼️';
+}
+
+.property-name[data-type="boolean"]::before {
+    content: '☑️';
+}
+
+.property-name[data-type="event"]::before {
+    content: '⚡';
+}
+
+.property-name[data-type="number"]::before {
+    content: '#️⃣';
+}
+
+/* Element Info Section */
+.element-info {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #333;
+    border-radius: 4px;
+    border: 1px solid #555;
+}
+
+.element-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.element-type {
+    font-size: 12px;
+    color: #9cdcfe;
+    font-style: italic;
+}
+
+.element-bounds {
+    font-size: 10px;
+    color: #888;
+    margin-top: 4px;
+    font-family: 'Courier New', monospace;
+}
+
+/* Collapsible Groups */
+.property-group.collapsed .property-group-content {
+    display: none;
+}
+
+.property-group-header {
+    cursor: pointer;
+    position: relative;
+}
+
+.property-group-header::after {
+    content: '▼';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.2s;
+    font-size: 10px;
+}
+
+.property-group.collapsed .property-group-header::after {
+    transform: translateY(-50%) rotate(-90deg);
+}
+
+/* Search/Filter */
+.property-search {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.property-search input {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #555;
+    background: #2d2d2d;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 11px;
+}
+
+.property-search input:focus {
+    outline: none;
+    border-color: #007acc;
+}
+
+.property-search input::placeholder {
+    color: #888;
+}
+
+/* No Selection State */
+.no-selection {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+    margin: 40px 20px;
+    padding: 20px;
+    border: 2px dashed #444;
+    border-radius: 6px;
+}
+
+/* Property Actions */
+.property-actions {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.property-actions button {
+    padding: 4px 8px;
+    margin: 0 2px;
+    font-size: 10px;
+    border: 1px solid #555;
+    background: #444;
+    color: #ccc;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.property-actions button:hover {
+    background: #555;
+    border-color: #666;
+}
+
+/* Scrollbar for property panel */
+.property-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.property-panel::-webkit-scrollbar-track {
+    background: #2a2a2a;
+}
+
+.property-panel::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 3px;
+}
+
+.property-panel::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}

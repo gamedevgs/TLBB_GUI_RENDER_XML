@@ -1,0 +1,500 @@
+/* Main Layout Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #2d2d30;
+    color: #cccccc;
+    overflow: hidden;
+}
+
+/* App Container */
+#app {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.app-header {
+    background-color: #3c3c3c;
+    border-bottom: 1px solid #464647;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 50px;
+}
+
+.app-header h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Buttons */
+.btn {
+    padding: 6px 12px;
+    border: 1px solid #464647;
+    background-color: #0e639c;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #1177bb;
+}
+
+.btn-secondary {
+    background-color: #5a5a5a;
+}
+
+.btn-secondary:hover {
+    background-color: #6a6a6a;
+}
+
+.select {
+    padding: 6px 8px;
+    border: 1px solid #464647;
+    background-color: #3c3c3c;
+    color: #cccccc;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+/* Viewport Controls */
+.viewport-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 10px;
+    padding: 6px 12px;
+    background-color: #2d2d30;
+    border-radius: 4px;
+    border: 1px solid #464647;
+}
+
+.viewport-controls label {
+    font-size: 12px;
+    color: #cccccc;
+    white-space: nowrap;
+}
+
+.custom-viewport {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 8px;
+}
+
+.custom-viewport input {
+    width: 70px;
+    padding: 4px 6px;
+    border: 1px solid #464647;
+    background-color: #3c3c3c;
+    color: #cccccc;
+    border-radius: 3px;
+    font-size: 11px;
+}
+
+.custom-viewport span {
+    color: #cccccc;
+    font-size: 12px;
+}
+
+.btn-small {
+    padding: 4px 8px;
+    font-size: 10px;
+    background-color: #0e639c;
+}
+
+/* Main Layout */
+.main-layout {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Sidebars */
+.sidebar {
+    width: 250px;
+    background-color: #252526;
+    border-right: 1px solid #464647;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-sidebar {
+    border-right: none;
+    border-left: 1px solid #464647;
+}
+
+.panel {
+    background-color: #252526;
+    border-bottom: 1px solid #464647;
+    flex-shrink: 0;
+}
+
+.panel h3 {
+    background-color: #2d2d30;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-bottom: 1px solid #464647;
+    color: #cccccc;
+}
+
+/* Canvas Container */
+.canvas-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #1e1e1e;
+    position: relative;
+}
+
+.render-canvas {
+    flex: 1;
+    overflow: auto;
+    position: relative;
+    background-color: #1e1e1e;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    display: flex;
+    justify-content: center; /* Center viewport horizontally */
+    align-items: center; /* Center vertically for better scaling */
+    padding: 20px; /* Add padding around viewport */
+}
+
+.canvas-content {
+    position: relative;
+    width: 1024px; /* Fixed viewport width */
+    height: 768px; /* Fixed viewport height */
+    transform-origin: center center; /* Center origin for scaling */
+    background-color: rgba(0, 0, 0, 0.8); /* Darker background for contrast */
+    border: 1px dashed rgba(1, 255, 35, 0.6); /* Blue border to show viewport */
+    margin: 0; /* Remove auto margin since parent handles centering */
+    flex-shrink: 0; /* Prevent shrinking */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
+    overflow: hidden; /* Clip content to viewport */
+    /* Add automatic scaling to fit available space */
+    max-width: calc(100vw - 640px); /* Account for side panels */
+    max-height: calc(100vh - 120px); /* Account for header/footer */
+    left:-50px;
+}
+
+/* Add viewport info overlay */
+.canvas-content::before {
+    content: attr(data-viewport-size);
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #007acc;
+    padding: 2px 6px;
+    font-size: 10px;
+    border-radius: 2px;
+    z-index: 10000;
+    pointer-events: none;
+}
+
+/* Canvas Controls */
+.canvas-controls {
+    background-color: #2d2d30;
+    border-top: 1px solid #464647;
+    padding: 5px 10px;
+    font-size: 11px;
+    display: flex;
+    gap: 20px;
+}
+
+/* Status Bar */
+.status-bar {
+    background-color: #007acc;
+    color: white;
+    padding: 4px 15px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* XML Tree */
+.xml-tree {
+    padding: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.tree-item {
+    padding: 2px 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tree-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.tree-item.selected {
+    background-color: #0e639c;
+    color: white;
+}
+
+.tree-toggle {
+    display: inline-block;
+    width: 12px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.tree-content {
+    display: inline-block;
+    margin-left: 4px;
+}
+
+.tree-children {
+    margin-left: 16px;
+}
+
+.tree-children.collapsed {
+    display: none;
+}
+
+/* Property Panel */
+.property-panel {
+    padding: 10px;
+    max-height: 48vh;
+    overflow-y: auto;
+    font-size: 12px;
+}
+
+.property-item {
+    margin-bottom: 8px;
+    padding: 4px;
+    border-radius: 3px;
+}
+
+.property-name {
+    font-weight: 600;
+    color: #9cdcfe;
+    margin-bottom: 2px;
+}
+
+.property-value {
+    color: #ce9178;
+    word-break: break-all;
+}
+
+.no-selection {
+    color: #888;
+    font-style: italic;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Log Panel */
+.log-panel {
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    font-size: 11px;
+    font-family: 'Courier New', monospace;
+}
+
+.log-entry {
+    margin-bottom: 4px;
+    padding: 2px 4px;
+    border-radius: 2px;
+}
+
+.log-entry.info {
+    color: #9cdcfe;
+}
+
+.log-entry.warning {
+    color: #dcdcaa;
+    background-color: rgba(220, 220, 170, 0.1);
+}
+
+.log-entry.error {
+    color: #f48771;
+    background-color: rgba(244, 135, 113, 0.1);
+}
+
+.log-entry.success {
+    color: #4ec9b0;
+    background-color: rgba(78, 201, 176, 0.1);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #464647;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5a5a5a;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .sidebar {
+        width: 200px;
+    }
+}
+
+@media (max-width: 800px) {
+    .main-layout {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: 200px;
+    }
+}
+       /* Menu strip styles */
+        .menu-bar {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-family: Arial, sans-serif;
+            user-select: none;
+        }
+
+        .menu-root {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 4px;
+        }
+
+        .menu-item>span {
+            padding: 4px 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: default;
+            border-radius: 4px;
+        }
+        .menu-top-icon { width:16px; height:16px; display:inline-flex; align-items:center; justify-content:center; font-size:14px; opacity:.85; }
+        .menu-item>span:hover .menu-top-icon, .menu-item>span:focus .menu-top-icon { opacity:1; }
+
+        .menu-item>span:focus,
+        .menu-item>span:hover {
+            background: #2f3a44;
+            color: #fff;
+            outline: none;
+        }
+
+        .menu-item {
+            position: relative;
+        }
+
+        .submenu {
+            list-style: none;
+            margin: 0;
+            padding: 6px 0;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #1f252b;
+            border: 1px solid #3a4450;
+            border-radius: 6px;
+            min-width: 210px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, .45);
+            display: none;
+            z-index: 9000;
+        }
+
+        .menu-item.open>.submenu {
+            display: block;
+        }
+
+        .submenu li {
+            padding: 0;
+        }
+
+        .submenu button,
+        .submenu select {
+            width: 100%;
+            background: transparent;
+            border: 0;
+            color: #d0d7de;
+            text-align: left;
+            padding: 6px 14px 6px 34px;
+            font: 12px/1.3 Arial;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .submenu button:hover,
+        .submenu select:hover {
+            background: #2c3740;
+        }
+
+        .submenu-block {
+            padding: 4px 12px 8px;
+        }
+
+        .submenu-block select {
+            background: #28333b;
+            border: 1px solid #3f4b56;
+            border-radius: 4px;
+            padding: 4px;
+        }
+
+        .submenu-sep {
+            height: 1px;
+            margin: 4px 0;
+            background: #333c44;
+        }
+
+        .menu-label {
+            display: block;
+            font-size: 11px;
+            color: #88939c;
+            margin-bottom: 4px;
+        }
+
+        .menu-bar button {
+            font-family: inherit;
+        }
+    .menu-icon { position:absolute; left:10px; top:50%; transform:translateY(-50%); width:16px; height:16px; opacity:.9; display:flex; align-items:center; justify-content:center; font-size:14px; }
+    .submenu button:hover .menu-icon { filter:brightness(1.15); }
+
+        @media (max-width:900px) {
+            .menu-bar {
+                flex-wrap: wrap;
+            }
+        }
+    /* Panel heading icons */
+    .panel h3 { display:flex; align-items:center; gap:6px; }
+    .panel h3 .panel-icon { width:16px; text-align:center; font-size:14px; opacity:.9; }
+    .panel h3 .panel-icon:hover { opacity:1; }
